@@ -7,6 +7,12 @@
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        #map {
+            height: 300px;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
 
@@ -51,6 +57,30 @@
                           </span>
                 </div>
         </nav>
+        
+        <div class="container">
+            <div class="row" style="padding-top: 30px;">
+                <form id="parametros">
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Longitud:</label>
+                        <input type="text" class="form-control" id="longitud" aria-describedby="emailHelp" placeholder="Ingresa Longitud">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Latitud:</label>
+                        <input type="password" class="form-control" id="latitud" placeholder="Ingresa Latitud">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Ingresar</button>
+                </form>
+            </div>
+            <div class="row">
+                <h3>My Google Maps Demo</h3>
+            </div>
+            
+                <div id="map"></div>
+         
+        </div>
+        
 
     
       <!--Footer-->
@@ -108,5 +138,34 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-</body>
+        <script>
+        
+                var longitud = parseFloat(131.044);
+                var latitud = parseFloat(-25.363);
+
+                $("#parametros").submit(function (event) {
+                        //var uluru = { lat: -25.363, lng: 131.044 };
+                        longitud = parseFloat(120.044);
+                        latitud = parseFloat(-20.363);
+                        // var longitud = parseFloat(document.getElementById("longitud").value);
+                        //var latitud = parseFloat(document.getElementById("latitud").value);
+                    });
+
+                function initMap() {
+                        var uluru = { lat: latitud, lng: longitud };
+                        var map = new google.maps.Map(document.getElementById('map'), {
+                            zoom: 4,
+                            center: uluru
+                        });
+                        var marker = new google.maps.Marker({
+                            position: uluru,
+                            map: map
+                        });
+                    }
+            //});
+
+        </script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnSUxqd-w4tV5gOE1PNeSpGBXpKOhvnuM&callback=initMap">
+        </script>
+    </body>
 </html>
